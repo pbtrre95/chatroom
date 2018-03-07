@@ -1,4 +1,6 @@
-# chatroom
+# Peter Byrne | Computer Networks | CA2 | Socket Programming
+
+## Multi Chatroom
 
 My chatroom project is a multiroom application where clients can communicate with messages. 
 Each client has username, text colour and avatar. 
