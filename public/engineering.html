@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Multiple Chatrooms</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS --> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+      crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
+      crossorigin="anonymous">
+    <style>
+      #form-message { padding: 20px; position: fixed; bottom: 0; width: 100%; padding-right: 50px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      .col-lg-12 { position: fixed; bottom: 0; }
+      #settings { display: flex; width: 28%; position: fixed; right: 150px; top: 20px; }
+      img { width: 30px; height: 30px; }
+      p { margin: 0; }
+      #avatarSelect { border: 1px #eee solid; margin-right: 15px; }
+      .avatars { display: flex; }
+      a img { width: 39px; height: 39px; padding-right: 5px;}
+      /* #forms {  } */
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="page-header">
+        <h1>Engineering Chatroom</h1>      
+      </div>
+      <div class="row">
+        <ul id="messages"></ul>
+      </div>
+      <div class="row">
+          <div class="col-lg-12">
+            <form id="form-message" action="">
+              <div class="input-group">
+                <input id="m" autocomplete="off" type="text" class="form-control" placeholder="Message..." aria-label="Message...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">Send</button>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    <div id="settings">
+      <div id="avatarSelect">
+        <div class="avatars">
+          <a id="https://image.flaticon.com/icons/svg/180/180644.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180644.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180675.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180675.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180666.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180666.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180687.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180687.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180664.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180664.svg">
+          </a>
+        </div>
+        <div class="avatars">
+          <a id="https://image.flaticon.com/icons/svg/180/180669.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180669.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180647.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180647.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180649.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180649.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180674.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180674.svg">
+          </a><a id="https://image.flaticon.com/icons/svg/180/180665.svg" onClick="select(this.id)">
+          <img border="1" alt="Avatar" src="https://image.flaticon.com/icons/svg/180/180665.svg">
+          </a>
+        </div>
+      </div>
+      <div id="forms">
+        <form id="form-username">
+          <div class="input-group">
+              <input id="u" autocomplete="off" type="text" class="form-control" placeholder="Username..." aria-label="Username...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Change</button>
+              </span>
+          </div>
+        </form>
+        <form id="form-colour">
+          <div class="input-group">
+              <input id="c" autocomplete="off" type="color" class="form-control" placeholder="Choose text colour..." aria-label="Choose text colour...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Choose</button>
+              </span>
+          </div>
+        </form>
+      </div>
+    </div>
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+    crossorigin="anonymous"></script>
+    <script>
+      var room = 'engineering'; 
+      var socket = io('/departments');
+
+      $('#form-message').submit(() => {
+        let msg = $('#m').val();
+        socket.emit('message', { msg, room });
+        $('#m').val('');
+        return false;
+      });
+
+      $('#form-username').submit(() => {
+        let usr = $('#u').val();
+        socket.emit('username', { usr, room });
+        $('#u').val('');
+        return false;
+      });
+
+      $('#form-colour').submit(() => {
+        let clr = $('#c').val();
+        socket.emit('colour', { clr });
+        return false;
+      });
+
+      function select(clicked_avatar) {
+        let avt = clicked_avatar;
+        socket.emit('avatar', { avt, room });
+        return false;
+      }
+
+      socket.on('connect', () => {
+        // emitting to everybody
+        socket.emit('join', { room: room });
+      })
+      
+      socket.on('join-message', function(data) {
+        var html = '<li style="color:'+data.colour+'">'+'<p>'+'<img src='+data.avatar+'>'+data.message+'</p>'+'</li>';
+        $('#messages').append(html);
+      })
+
+      socket.on('dmessage', function(data) {
+        var html = '<li style="color:'+data.colour+'">'+'<p>'+'<img src='+data.avatar+'>'+data.message+'</p>'+'</li>';
+        $('#messages').append(html);
+        alert(data.message)
+      })
+
+      socket.on('message', function(data) {
+        var html = '<li style="color:'+data.colour+'">'+'<p>'+'<img src='+data.avatar+'>'+data.user+': '+data.message+'</p>'+'</li>';
+        $('#messages').append(html);
+      })
+
+      socket.on('username-message', function(data) {
+        var html = '<li style="color:'+data.colour+'">'+'<p>'+'<img src='+data.avatar+'>'+data.message+'</p>'+'</li>';
+        $('#messages').append(html);
+     })
+
+      socket.on('avatar-message', function(data) {
+        var html = '<li style="color:'+data.colour+'">'+'<p>'+data.message+'<img src='+data.avatar+'>'+'</p>'+'</li>';
+        $('#messages').append(html);
+      })
+    </script>
+  </body>
+</html>
